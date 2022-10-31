@@ -20,7 +20,7 @@ const ReviewPageBody = ({ reviewCategory }) => {
         {reviews.map((review) => {
           if (reviewCategory === review.category)
             return (
-              <Card id="reviewCard">
+              <Card id="reviewCard" key={review.review_id}>
                 <Card.Title>{review.title}</Card.Title>
                 <Card.Text>Category: {review.category}</Card.Text>
                 <Card.Text>{review.review_body}</Card.Text>

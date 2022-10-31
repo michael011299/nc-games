@@ -29,7 +29,7 @@ const Categories = ({ setReviewCategory, reviewCategory }) => {
       <h2>Categories</h2>
       {categories.map((category) => {
         return (
-          <Card id="categories">
+          <Card id="categories" key={category.slug}>
             <Card.Title id="catTitle">{category.slug}</Card.Title>
             <Card.Text>{category.description}</Card.Text>
             <Link to={`/${category.slug}/reviews`}>
