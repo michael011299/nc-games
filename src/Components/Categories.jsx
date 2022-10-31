@@ -1,8 +1,10 @@
 import { Card } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
-const Categories = () => {
+const Categories = ({ setReviewCategory, reviewCategory }) => {
   const [reviews, setReviews] = useState([]);
   const [categories, setCategories] = useState([]);
 
@@ -30,20 +32,16 @@ const Categories = () => {
           <Card id="categories">
             <Card.Title id="catTitle">{category.slug}</Card.Title>
             <Card.Text>{category.description}</Card.Text>
-            <div id="reviews">
-              {reviews.map((review) => {
-                if (review.category === category.slug) {
-                  return (
-                    <Card id="review">
-                      <Card.Title id="reviewTitle">{review.title}</Card.Title>
-                      <Card.Text id="reviewCategory">
-                        {review.category}
-                      </Card.Text>
-                    </Card>
-                  );
-                }
-              })}
-            </div>
+            <Link to={`/${category.slug}/reviews`}>
+              <Button
+                id="selectCatButton"
+                onClick={() => {
+                  return setReviewCategory(category.slug);
+                }}
+              >
+                ➡️
+              </Button>
+            </Link>
           </Card>
         );
       })}
