@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Card } from "react-bootstrap";
 
-const Display = () => {
+const ReviewPageBody = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -21,9 +21,9 @@ const Display = () => {
           return (
             <Card id="reviewCard">
               <Card.Title>{review.title}</Card.Title>
-              <Card.Text>{review.category}</Card.Text>
+              <Card.Text>Category: {review.category}</Card.Text>
               <Card.Text>{review.review_body}</Card.Text>
-              <Card.Text>{review.owner}</Card.Text>
+              <Card.Text>Owner: {review.owner}</Card.Text>
             </Card>
           );
         })}
@@ -32,4 +32,4 @@ const Display = () => {
   );
 };
 
-export default Display;
+export default ReviewPageBody;

@@ -1,11 +1,11 @@
-import Sorting from "./Sorting";
-import Display from "./Display";
+// import Sorting from "./Sorting";
+import ReviewPageBody from "./ReviewPageBody";
 
 const PageBody = () => {
   return (
     <div id="pagebody">
-      <Sorting />
-      <Display />
+      {/* <Sorting /> */}
+      <ReviewPageBody />
     </div>
   );
 };
