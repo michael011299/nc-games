@@ -4,17 +4,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Categories = ({ setReviewCategory, reviewCategory }) => {
-  const [reviews, setReviews] = useState([]);
+const Categories = ({ setReviewCategory, reviews }) => {
   const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    fetch("https://michaels-back-end-project-22.herokuapp.com/api/reviews")
-      .then((response) => response.json())
-      .then((data) => {
-        setReviews(data.reviews);
-      });
-  }, [reviews]);
 
   useEffect(() => {
     fetch("https://michaels-back-end-project-22.herokuapp.com/api/categories")

@@ -1,12 +1,23 @@
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Header from "./Components/Header";
 import Categories from "./Components/Categories";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReviewPageBody from "./Components/ReviewPageBody";
-import { useState } from "react";
+import SingleReview from "./Components/SingleReview";
 
 const App = () => {
   const [reviewCategory, setReviewCategory] = useState("");
+  const [reviewID, setReviewID] = useState("");
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    fetch("https://michaels-back-end-project-22.herokuapp.com/api/reviews")
+      .then((response) => response.json())
+      .then((data) => {
+        setReviews(data.reviews);
+      });
+  }, [reviews]);
 
   return (
     <div>
@@ -24,7 +35,17 @@ const App = () => {
           />
           <Route
             path={`/${reviewCategory}/reviews`}
-            element={<ReviewPageBody reviewCategory={reviewCategory} />}
+            element={
+              <ReviewPageBody
+                reviews={reviews}
+                reviewCategory={reviewCategory}
+                setReviewID={setReviewID}
+              />
+            }
+          />
+          <Route
+            path={`/${reviewID}/reviews`}
+            element={<SingleReview reviews={reviews} reviewID={reviewID} />}
           />
         </Routes>
       </BrowserRouter>
