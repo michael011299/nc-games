@@ -1,22 +1,32 @@
-import { useState } from "react";
-import { useEffect } from "react";
 import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import { useState, useEffect } from "react";
+import { getReviews } from "../APIcalls";
 
-const ReviewPageBody = ({ reviewCategory }) => {
+const ReviewPageBody = ({ reviewCategory, setReviewID }) => {
   const [reviews, setReviews] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://michaels-back-end-project-22.herokuapp.com/api/reviews")
-      .then((response) => response.json())
-      .then((data) => {
-        setReviews(data.reviews);
+    getReviews()
+      .then((reviews) => {
+        setReviews(reviews);
+      })
+      .catch((err) => {
+        if (err.response.status)
+          setError(
+            `Ooops, ${err.response.request.status}, ${err.response.request.statusText}, please try again`
+          );
       });
-  }, [reviews]);
+  }, []);
 
   return (
-    <div id="reviewpage">
-      <h2>{reviewCategory} - reviews</h2>
+    <div>
       <div>
+        <h2>{reviewCategory} - reviews</h2>
+      </div>
+      <div id="reviewpage">
         {reviews.map((review) => {
           if (reviewCategory === review.category)
             return (
@@ -26,17 +36,12 @@ const ReviewPageBody = ({ reviewCategory }) => {
                 <Card.Text>{review.review_body}</Card.Text>
                 <Card.Text>Owner: {review.owner}</Card.Text>
                 <Link to={`/reviews/${review.review_id}`}>
-                  <Button
-                    onClick={() => {
-                      return setReviewID(review.review_id);
-                    }}
-                  >
                   <Button onClick={() => setReviewID(review.review_id)}>
                     Review
                   </Button>
                 </Link>
               </Card>
-            )
+            );
         })}
       </div>
     </div>
