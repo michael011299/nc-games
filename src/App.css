@@ -17,12 +17,18 @@
 
 h1{
   margin-left: 20px;
+  color: red;
   font-family: American Typewriter, serif;
 }
 
 h2{
   margin: 10px;
   margin-top: 100px;
+  text-transform: uppercase;
+}
+
+h3{
+  margin-left: 150px;
 }
 
  #mainpage{
@@ -30,22 +36,51 @@ h2{
   margin: 10px;
   border-style: solid;
   border-color: black;
-  
+  background-color: red;
  }
+
+#reviewDetails{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
 
  #categories {
   border-style: solid;
   border-color: black;
-  margin: 10px;
+  background-color: white;
+  margin: 5px;
   padding: 5px;
   display: grid;
  }
 
  #reviews{
-  margin: 10px;
   padding: 5px;
+  background-color: white;
+  margin: 5px;
   grid-template-columns: 1fr 1fr 1fr;
   display: grid;
+ }
+
+ #Title{
+  text-transform: uppercase;
+  font-size: 20px;
+  text-decoration: underline;
+ }
+
+ #cardCat{
+  color: rgba(0, 0, 0, 0.528);
+ }
+
+ #reviewImg{
+  height: 150px;
+  width: 150px;
+  float: right;
+  border-radius: 5px;
+ }
+
+ #reviewButton{
+  height: 50px;
+  width: 100px;
  }
 
 #review{
@@ -53,6 +88,7 @@ h2{
   border-color: black;
   margin: 10px;
   padding: 5px;
+  background-color: white;
 }
 
 #catTitle{
@@ -83,13 +119,17 @@ width: 50px
   border-style: solid;
   border-color: black;
   margin: 10px;
+  background-color: red;
+  border-radius: 5px;
 }
 
 #reviewCard{
   border-style: solid;
   border-color: black;
   margin: 10px;
+  border-radius: 5px;
   padding: 10px;
+  background-color: white;
 }
 
 #singleReviewCard{
@@ -97,4 +137,20 @@ width: 50px
   border-color: black;
   margin: 10px;
   padding: 10px;
+}
+
+.singleCommentCard{
+    border-style: solid;
+    border-color: red;
+    background-color: white;
+    margin: 10px;
+    padding: 10px;
+}
+
+#commentPage{
+  border-style: solid;
+  border-color: red;
+  background-color: black;
+  margin: 10px;
+  margin-left: 150px;
 }

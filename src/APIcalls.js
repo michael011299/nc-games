@@ -21,3 +21,17 @@ export const getCategories = () => {
     return response.data.categories;
   });
 };
+
+export const increaseVote = (reviewID) => {
+  return gamesApi
+    .patch(`/reviews/${reviewID}`, { inc_votes: 1 })
+    .then((response) => {
+      return response;
+    });
+};
+
+export const getCommentsByReviewID = (reviewID) => {
+  return gamesApi
+    .get(`/reviews/${reviewID}/comments`)
+    .then((response) => response.data.comments);
+};

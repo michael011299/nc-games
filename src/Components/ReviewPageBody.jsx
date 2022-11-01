@@ -1,8 +1,8 @@
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { useState, useEffect } from "react";
-import { getReviews } from "../APIcalls";
+import { useEffect, useState } from "react";
+import { getReviews, increaseVote } from "../APIcalls";
 
 const ReviewPageBody = ({ reviewCategory, setReviewID }) => {
   const [reviews, setReviews] = useState([]);
@@ -38,15 +38,31 @@ const ReviewPageBody = ({ reviewCategory, setReviewID }) => {
               if (reviewCategory === review.category)
                 return (
                   <Card id="reviewCard" key={review.review_id}>
-                    <Card.Title>{review.title}</Card.Title>
-                    <Card.Text>Category: {review.category}</Card.Text>
+                    <Card.Title id="Title">{review.title}</Card.Title>
+                    <Card.Text id="cardCat">{review.category}</Card.Text>
                     <Card.Text>{review.review_body}</Card.Text>
-                    <Card.Text>Owner: {review.owner}</Card.Text>
-                    <Link to={`/reviews/${review.review_id}`}>
-                      <Button onClick={() => setReviewID(review.review_id)}>
-                        Review
+                    <div id="reviewDetails">
+                      <Button
+                        id="reviewButton"
+                        onClick={() => increaseVote(review.review_id)}
+                      >
+                        Votes: {review.votes}
                       </Button>
-                    </Link>
+                      <Link to={`/reviews/${review.review_id}`}>
+                        <Button
+                          id="reviewButton"
+                          onClick={() => setReviewID(review.review_id)}
+                        >
+                          Review
+                        </Button>
+                      </Link>
+                      <img
+                        id="reviewImg"
+                        alt={`user ${review.review_id}`}
+                        src={review.review_img_url}
+                      ></img>
+                      <Card.Text>Owner: {review.owner}</Card.Text>
+                    </div>
                   </Card>
                 );
             })}
