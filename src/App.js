@@ -1,12 +1,15 @@
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Header from "./Components/Header";
 import Categories from "./Components/Categories";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReviewPageBody from "./Components/ReviewPageBody";
-import { useState } from "react";
+import SingleReview from "./Components/SingleReview";
+import { getReviews } from "./APIcalls";
 
 const App = () => {
   const [reviewCategory, setReviewCategory] = useState("");
+  const [reviewID, setReviewID] = useState("");
 
   return (
     <div>
@@ -24,8 +27,14 @@ const App = () => {
           />
           <Route
             path={`/${reviewCategory}/reviews`}
-            element={<ReviewPageBody reviewCategory={reviewCategory} />}
+            element={
+              <ReviewPageBody
+                reviewCategory={reviewCategory}
+                setReviewID={setReviewID}
+              />
+            }
           />
+          <Route path={`/reviews/:reviewID`} element={<SingleReview />} />
         </Routes>
       </BrowserRouter>
     </div>
