@@ -4,9 +4,11 @@ import Button from "react-bootstrap/Button";
 
 const ReviewPageBody = ({ reviews, reviewCategory, setReviewID }) => {
   return (
-    <div id="reviewpage">
-      <h2>{reviewCategory} - reviews</h2>
+    <div>
       <div>
+        <h2>{reviewCategory} - reviews</h2>
+      </div>
+      <div id="reviewpage">
         {reviews.map((review) => {
           if (reviewCategory === review.category)
             return (
@@ -15,7 +17,7 @@ const ReviewPageBody = ({ reviews, reviewCategory, setReviewID }) => {
                 <Card.Text>Category: {review.category}</Card.Text>
                 <Card.Text>{review.review_body}</Card.Text>
                 <Card.Text>Owner: {review.owner}</Card.Text>
-                <Link to={`/${review.review_id}/reviews`}>
+                <Link to={`/reviews/${review.review_id}`}>
                   <Button
                     onClick={() => {
                       return setReviewID(review.review_id);

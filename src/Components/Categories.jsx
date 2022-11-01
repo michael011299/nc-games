@@ -16,26 +16,30 @@ const Categories = ({ setReviewCategory, reviews }) => {
   }, [categories]);
 
   return (
-    <div id="mainpage">
-      <h2>Categories</h2>
-      {categories.map((category) => {
-        return (
-          <Card id="categories" key={category.slug}>
-            <Card.Title id="catTitle">{category.slug}</Card.Title>
-            <Card.Text>{category.description}</Card.Text>
-            <Link to={`/${category.slug}/reviews`}>
-              <Button
-                id="selectCatButton"
-                onClick={() => {
-                  return setReviewCategory(category.slug);
-                }}
-              >
-                ➡️
-              </Button>
-            </Link>
-          </Card>
-        );
-      })}
+    <div>
+      <div>
+        <h2>Categories</h2>
+      </div>
+      <div id="mainpage">
+        {categories.map((category) => {
+          return (
+            <Card id="categories" key={category.slug}>
+              <Card.Title id="catTitle">{category.slug}</Card.Title>
+              <Card.Text>{category.description}</Card.Text>
+              <Link to={`/${category.slug}/reviews`}>
+                <Button
+                  id="selectCatButton"
+                  onClick={() => {
+                    return setReviewCategory(category.slug);
+                  }}
+                >
+                  ➡️
+                </Button>
+              </Link>
+            </Card>
+          );
+        })}
+      </div>
     </div>
   );
 };

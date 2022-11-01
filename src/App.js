@@ -44,7 +44,7 @@ const App = () => {
             }
           />
           <Route
-            path={`/${reviewID}/reviews`}
+            path={`/reviews/${reviewID}/`}
             element={<SingleReview reviews={reviews} reviewID={reviewID} />}
           />
         </Routes>

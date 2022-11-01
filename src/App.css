@@ -19,11 +19,16 @@ h1{
   margin-left: 20px;
   font-family: American Typewriter, serif;
 }
+h2{
+  margin: 10px;
+  margin-top: 90px;
+  font-variant: small-caps;
+  font-size: 30px;
+}
 
  #mainpage{
   padding: 10px;
   margin: 10px;
-  margin-top: 120px;
   border-style: solid;
   border-color: black;
   
@@ -79,11 +84,17 @@ width: 50px
   border-style: solid;
   border-color: black;
   margin: 10px;
-  margin-top: 100px
 }
 
 #reviewCard{
   border-style: solid;
   border-color: black;
   margin: 10px;
+}
+
+#singleReviewCard{
+  border-style: solid;
+  border-color: black;
+  margin: 10px;
+
 }
