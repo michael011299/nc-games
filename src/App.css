@@ -37,6 +37,7 @@ h3{
   border-style: solid;
   border-color: black;
   background-color: red;
+  border-radius: 5px;
  }
 
 #reviewDetails{
@@ -47,41 +48,14 @@ h3{
  #categories {
   border-style: solid;
   border-color: black;
-  background-color: white;
-  margin: 5px;
-  padding: 5px;
-  display: grid;
- }
-
- #reviews{
-  padding: 5px;
-  background-color: white;
-  margin: 5px;
-  grid-template-columns: 1fr 1fr 1fr;
-  display: grid;
- }
-
- #Title{
-  text-transform: uppercase;
-  font-size: 20px;
-  text-decoration: underline;
- }
-
- #cardCat{
-  color: rgba(0, 0, 0, 0.528);
- }
-
- #reviewImg{
-  height: 150px;
-  width: 150px;
-  float: right;
   border-radius: 5px;
+  background-color: white;
+  margin: 5px;
+  padding: 5px;
+  display: grid;
  }
 
- #reviewButton{
-  height: 50px;
-  width: 100px;
- }
+
 
 #review{
   border-style: solid;
@@ -139,6 +113,36 @@ width: 50px
   padding: 10px;
 }
 
+#reviews{
+  padding: 5px;
+  background-color: white;
+  margin: 5px;
+  grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+ }
+
+ #reviewImg{
+  height: 150px;
+  width: 150px;
+  float: right;
+  border-radius: 5px;
+ }
+
+ #reviewButton{
+  height: 50px;
+  width: 100px;
+ }
+
+ #Title{
+  text-transform: uppercase;
+  font-size: 20px;
+  text-decoration: underline;
+ }
+
+ #cardCat{
+  color: rgba(0, 0, 0, 0.528);
+}
+
 .singleCommentCard{
     border-style: solid;
     border-color: red;
@@ -153,4 +157,19 @@ width: 50px
   background-color: black;
   margin: 10px;
   margin-left: 150px;
+}
+
+#signin{
+  font-size: 20px;
+  margin-top: -65px;
+  border-color: white;
+  text-transform:uppercase;
+  border-width: 5px;
+  background-color: black;
+  color: red;
+  margin-right: 10px;
+  border-radius: 5px;
+  width: 200px;
+  height: 50px;
+  float: right;
 }
