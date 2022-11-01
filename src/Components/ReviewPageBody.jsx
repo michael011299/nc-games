@@ -25,8 +25,18 @@ const ReviewPageBody = ({ reviewCategory }) => {
                 <Card.Text>Category: {review.category}</Card.Text>
                 <Card.Text>{review.review_body}</Card.Text>
                 <Card.Text>Owner: {review.owner}</Card.Text>
+                <Link to={`/reviews/${review.review_id}`}>
+                  <Button
+                    onClick={() => {
+                      return setReviewID(review.review_id);
+                    }}
+                  >
+                  <Button onClick={() => setReviewID(review.review_id)}>
+                    Review
+                  </Button>
+                </Link>
               </Card>
-            );
+            )
         })}
       </div>
     </div>
