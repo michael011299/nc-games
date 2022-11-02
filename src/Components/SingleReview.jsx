@@ -1,7 +1,12 @@
 import { Button, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getCommentsByReviewID, getReviewByID } from "../APIcalls";
+import {
+  decreaseVote,
+  getCommentsByReviewID,
+  getReviewByID,
+  increaseVote,
+} from "../APIcalls";
 
 const SingleReview = () => {
   const { reviewID } = useParams();
@@ -51,12 +56,22 @@ const SingleReview = () => {
               <Card.Text id="cardCat">{singularReview.category}</Card.Text>
               <Card.Text>{singularReview.review_body}</Card.Text>
               <Card.Text>Owner: {singularReview.owner}</Card.Text>
+              <Card.Text>Votes: {count}</Card.Text>
               <Button
                 onClick={() => {
                   setCount(count + 1);
+                  increaseVote(singularReview.review_id);
                 }}
               >
-                Votes: {count}
+                Vote for me here 😀
+              </Button>
+              <Button
+                onClick={() => {
+                  setCount(count - 1);
+                  decreaseVote(singularReview.review_id);
+                }}
+              >
+                Remove a vote 🙃
               </Button>
             </Card>
           </div>

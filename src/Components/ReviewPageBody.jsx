@@ -40,31 +40,22 @@ const ReviewPageBody = ({ reviewCategory, setReviewID }) => {
                   <Card id="reviewCard" key={review.review_id}>
                     <Card.Title id="Title">{review.title}</Card.Title>
                     <Card.Text id="cardCat">{review.category}</Card.Text>
+                    <img
+                      id="reviewImg"
+                      alt={`user ${review.review_id}`}
+                      src={review.review_img_url}
+                    ></img>
                     <Card.Text>{review.review_body}</Card.Text>
-                    <div id="reviewDetails">
+                    <Card.Text>Owner: {review.owner}</Card.Text>
+                    <Card.Text>Votes: {review.votes}</Card.Text>
+                    <Link to={`/reviews/${review.review_id}`}>
                       <Button
                         id="reviewButton"
-                        onClick={() => {
-                          increaseVote(review.review_id);
-                        }}
+                        onClick={() => setReviewID(review.review_id)}
                       >
-                        Votes: {review.review_id}
+                        Leave comments and vote on reviews here ➡️
                       </Button>
-                      <Link to={`/reviews/${review.review_id}`}>
-                        <Button
-                          id="reviewButton"
-                          onClick={() => setReviewID(review.review_id)}
-                        >
-                          Review
-                        </Button>
-                      </Link>
-                      <img
-                        id="reviewImg"
-                        alt={`user ${review.review_id}`}
-                        src={review.review_img_url}
-                      ></img>
-                      <Card.Text>Owner: {review.owner}</Card.Text>
-                    </div>
+                    </Link>
                   </Card>
                 );
               }
