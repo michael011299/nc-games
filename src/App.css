@@ -42,7 +42,7 @@ h3{
 
 #reviewDetails{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 8fr 2fr;
 }
 
  #categories {
@@ -117,20 +117,21 @@ width: 50px
   padding: 5px;
   background-color: white;
   margin: 5px;
-  grid-template-columns: 1fr 1fr 1fr;
-  display: grid;
  }
 
  #reviewImg{
   height: 150px;
   width: 150px;
-  float: right;
   border-radius: 5px;
+  float: right;
+  margin-top: -80px
  }
 
  #reviewButton{
   height: 50px;
-  width: 100px;
+  width: 200px;
+  float: right;
+  margin-top: -50px;
  }
 
  #Title{
