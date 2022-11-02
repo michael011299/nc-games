@@ -1,13 +1,9 @@
 import { Button, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {
-  decreaseVote,
-  getReviewByID,
-  increaseVote,
-  postComments,
-} from "../APIcalls";
+import { decreaseVote, getReviewByID, increaseVote } from "../APIcalls";
 import GetComments from "./GetComments";
+import PostComments from "./PostComments";
 import Spinner from "react-bootstrap/Spinner";
 
 const SingleReview = () => {
@@ -16,8 +12,6 @@ const SingleReview = () => {
   const [error, setError] = useState(null);
   const [count, setCount] = useState(0);
   const [Loading, setLoading] = useState(true);
-  const [newUsername, setUserName] = useState("");
-  const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -44,22 +38,6 @@ const SingleReview = () => {
       </div>
     );
   }
-
-  const handleCommentChange = (event) => {
-    setNewComment(event.target.value);
-  };
-
-  const handleUserNameChange = (event) => {
-    setUserName(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    let newComments = { username: newUsername, body: newComment };
-    postComments(reviewID, newComments);
-    setNewComment("");
-    setUserName("");
-  };
 
   return (
     <div>
@@ -100,28 +78,7 @@ const SingleReview = () => {
               >
                 Remove a vote 🙃
               </Button>
-              <form id="addComment">
-                <fieldset id="fieldset">
-                  <legend>Add Comment</legend>
-                  <label>Username: </label>
-                  <input
-                    id="username"
-                    type="text"
-                    value={newUsername}
-                    onChange={handleUserNameChange}
-                  />
-                  <label> Comment: </label>
-                  <input
-                    id="addToDo"
-                    type="text"
-                    value={newComment}
-                    onChange={handleCommentChange}
-                  />
-                  <button onClick={handleSubmit} type="submit">
-                    Add
-                  </button>
-                </fieldset>
-              </form>
+              <PostComments />
             </Card>
           </div>
           <h3>Review #{singularReview.review_id} comments :</h3>

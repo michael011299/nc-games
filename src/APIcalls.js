@@ -44,11 +44,13 @@ export const getCommentsByReviewID = (reviewID) => {
     .then((response) => response.data.comments);
 };
 
-export const postComments = (reviewID, newComments) => {
-  console.log(newComments);
+export const postComments = (reviewID, newComment) => {
   return gamesApi
-    .post(`/reviews/${reviewID}/comments`, newComments)
+    .post(`/reviews/${reviewID}/comments`, {
+      username: "tickle122",
+      body: newComment,
+    })
     .then((response) => {
-      return response;
+      return response.data.comments;
     });
 };

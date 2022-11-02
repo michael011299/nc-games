@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import { getReviews } from "../APIcalls";
 import Image from "react-bootstrap/Image";
-import Spinner from "react-bootstrap/Spinner";
+import ReviewSorting from "./ReviewSorting";
 
 const ReviewPageBody = ({ setReviewID }) => {
   const [reviews, setReviews] = useState([]);
@@ -28,11 +28,7 @@ const ReviewPageBody = ({ setReviewID }) => {
   }, []);
 
   if (Loading) {
-    return (
-      <Spinner id="spinner" animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-    );
+    return <div id="spinner">Loading...</div>;
   }
 
   return (
@@ -46,6 +42,7 @@ const ReviewPageBody = ({ setReviewID }) => {
         <div>
           <div>
             <h2>{reviewCategory} - reviews</h2>
+            <ReviewSorting />
           </div>
           <div id="reviewpage">
             {reviews.map((review) => {
@@ -66,6 +63,7 @@ const ReviewPageBody = ({ setReviewID }) => {
                     <Card.Text>{review.review_body}</Card.Text>
                     <Card.Text>Owner: {review.owner}</Card.Text>
                     <Card.Text>Votes: {review.votes}</Card.Text>
+                    <Card.Text>Comments: {review.comment_count}</Card.Text>
                     <Link to={`/reviews/${review.review_id}`}>
                       <Button
                         id="reviewButton"

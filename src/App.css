@@ -196,3 +196,9 @@ width: 50px
   margin-left: 50px;
   color: black;
 }
+
+#addComment{
+  background-color: white;
+  margin: 10px;
+  margin-top: 20px
+}
