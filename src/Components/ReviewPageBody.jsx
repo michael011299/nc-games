@@ -35,7 +35,7 @@ const ReviewPageBody = ({ reviewCategory, setReviewID }) => {
           </div>
           <div id="reviewpage">
             {reviews.map((review) => {
-              if (reviewCategory === review.category)
+              if (reviewCategory === review.category) {
                 return (
                   <Card id="reviewCard" key={review.review_id}>
                     <Card.Title id="Title">{review.title}</Card.Title>
@@ -44,9 +44,11 @@ const ReviewPageBody = ({ reviewCategory, setReviewID }) => {
                     <div id="reviewDetails">
                       <Button
                         id="reviewButton"
-                        onClick={() => increaseVote(review.review_id)}
+                        onClick={() => {
+                          increaseVote(review.review_id);
+                        }}
                       >
-                        Votes: {review.votes}
+                        Votes: {review.review_id}
                       </Button>
                       <Link to={`/reviews/${review.review_id}`}>
                         <Button
@@ -65,6 +67,7 @@ const ReviewPageBody = ({ reviewCategory, setReviewID }) => {
                     </div>
                   </Card>
                 );
+              }
             })}
           </div>
         </div>

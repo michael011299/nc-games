@@ -1,4 +1,4 @@
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCommentsByReviewID, getReviewByID } from "../APIcalls";
@@ -8,10 +8,14 @@ const SingleReview = () => {
   const [singularReview, setSingularReview] = useState({});
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     getReviewByID(reviewID)
-      .then((review) => setSingularReview(review))
+      .then((review) => {
+        setSingularReview(review);
+        setCount(review.votes);
+      })
       .catch((err) => {
         if (err.response.status)
           setError(
@@ -47,7 +51,13 @@ const SingleReview = () => {
               <Card.Text id="cardCat">{singularReview.category}</Card.Text>
               <Card.Text>{singularReview.review_body}</Card.Text>
               <Card.Text>Owner: {singularReview.owner}</Card.Text>
-              <Card.Text>Votes: {singularReview.votes}</Card.Text>
+              <Button
+                onClick={() => {
+                  setCount(count + 1);
+                }}
+              >
+                Votes: {count}
+              </Button>
             </Card>
           </div>
           <h3>Review #{singularReview.review_id} comments :</h3>
@@ -57,7 +67,7 @@ const SingleReview = () => {
                 <Card className="singleCommentCard" id={comment.comment_id}>
                   <Card.Title>Author: {comment.author}</Card.Title>
                   <Card.Text>Comment: {comment.body}</Card.Text>
-                  <Card.Text>Votes: {comment.votes}</Card.Text>
+                  <Button>Votes: {comment.votes}</Button>
                   <Card.Text>{comment.created_at}</Card.Text>
                 </Card>
               );
