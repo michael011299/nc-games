@@ -1,25 +1,24 @@
 import { Button, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {
-  decreaseVote,
-  getCommentsByReviewID,
-  getReviewByID,
-  increaseVote,
-} from "../APIcalls";
+import { decreaseVote, getReviewByID, increaseVote } from "../APIcalls";
+import GetComments from "./GetComments";
+import Spinner from "react-bootstrap/Spinner";
 
 const SingleReview = () => {
   const { reviewID } = useParams();
   const [singularReview, setSingularReview] = useState({});
-  const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const [count, setCount] = useState(0);
+  const [Loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     getReviewByID(reviewID)
       .then((review) => {
         setSingularReview(review);
         setCount(review.votes);
+        setLoading(false);
       })
       .catch((err) => {
         if (err.response.status)
@@ -29,16 +28,15 @@ const SingleReview = () => {
       });
   }, [reviewID]);
 
-  useEffect(() => {
-    getCommentsByReviewID(reviewID)
-      .then((data) => setComments(data))
-      .catch((err) => {
-        if (err.response.status)
-          setError(
-            `Ooops, ${err.response.request.status}, ${err.response.request.statusText}, please try again`
-          );
-      });
-  }, [reviewID]);
+  if (Loading) {
+    return (
+      <div>
+        <Spinner id="spinner" animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -51,13 +49,18 @@ const SingleReview = () => {
         <div>
           <h2>Review #{singularReview.review_id}</h2>
           <div id="reviewpage">
-            <Card id="reviewCard" key={singularReview.review_id}>
+            <Card
+              id={singularReview.review_id}
+              key={singularReview.review_id}
+              className="reviewCard"
+            >
               <Card.Title id="Title">{singularReview.title}</Card.Title>
               <Card.Text id="cardCat">{singularReview.category}</Card.Text>
               <Card.Text>{singularReview.review_body}</Card.Text>
               <Card.Text>Owner: {singularReview.owner}</Card.Text>
               <Card.Text>Votes: {count}</Card.Text>
               <Button
+                id="increaseVote"
                 onClick={() => {
                   setCount(count + 1);
                   increaseVote(singularReview.review_id);
@@ -66,6 +69,7 @@ const SingleReview = () => {
                 Vote for me here 😀
               </Button>
               <Button
+                id="decreaseVote"
                 onClick={() => {
                   setCount(count - 1);
                   decreaseVote(singularReview.review_id);
@@ -76,18 +80,7 @@ const SingleReview = () => {
             </Card>
           </div>
           <h3>Review #{singularReview.review_id} comments :</h3>
-          <div id="commentPage">
-            {comments.map((comment) => {
-              return (
-                <Card className="singleCommentCard" id={comment.comment_id}>
-                  <Card.Title>Author: {comment.author}</Card.Title>
-                  <Card.Text>Comment: {comment.body}</Card.Text>
-                  <Button>Votes: {comment.votes}</Button>
-                  <Card.Text>{comment.created_at}</Card.Text>
-                </Card>
-              );
-            })}
-          </div>
+          <GetComments />
         </div>
       )}
     </div>

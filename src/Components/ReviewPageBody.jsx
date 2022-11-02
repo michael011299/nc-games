@@ -1,17 +1,23 @@
 import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
-import { getReviews, increaseVote } from "../APIcalls";
+import { getReviews } from "../APIcalls";
+import Image from "react-bootstrap/Image";
+import Spinner from "react-bootstrap/Spinner";
 
-const ReviewPageBody = ({ reviewCategory, setReviewID }) => {
+const ReviewPageBody = ({ setReviewID }) => {
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
+  const { reviewCategory } = useParams();
+  const [Loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     getReviews()
       .then((reviews) => {
         setReviews(reviews);
+        setLoading(false);
       })
       .catch((err) => {
         if (err.response.status)
@@ -20,6 +26,14 @@ const ReviewPageBody = ({ reviewCategory, setReviewID }) => {
           );
       });
   }, []);
+
+  if (Loading) {
+    return (
+      <Spinner id="spinner" animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    );
+  }
 
   return (
     <div>
@@ -37,14 +51,18 @@ const ReviewPageBody = ({ reviewCategory, setReviewID }) => {
             {reviews.map((review) => {
               if (reviewCategory === review.category) {
                 return (
-                  <Card id="reviewCard" key={review.review_id}>
+                  <Card
+                    className="reviewCard"
+                    key={review.review_id}
+                    id={review.review_id}
+                  >
                     <Card.Title id="Title">{review.title}</Card.Title>
                     <Card.Text id="cardCat">{review.category}</Card.Text>
-                    <img
+                    <Image
                       id="reviewImg"
                       alt={`user ${review.review_id}`}
                       src={review.review_img_url}
-                    ></img>
+                    ></Image>
                     <Card.Text>{review.review_body}</Card.Text>
                     <Card.Text>Owner: {review.owner}</Card.Text>
                     <Card.Text>Votes: {review.votes}</Card.Text>
