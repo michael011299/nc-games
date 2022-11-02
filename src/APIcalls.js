@@ -44,8 +44,11 @@ export const getCommentsByReviewID = (reviewID) => {
     .then((response) => response.data.comments);
 };
 
-export const postComments = (reviewID) => {
-  return gamesApi.post(`/api/reviews/:review_id/comments`).then((response) => {
-    return response;
-  });
+export const postComments = (reviewID, newComments) => {
+  console.log(newComments);
+  return gamesApi
+    .post(`/reviews/${reviewID}/comments`, newComments)
+    .then((response) => {
+      return response;
+    });
 };

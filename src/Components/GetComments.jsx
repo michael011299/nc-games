@@ -7,7 +7,7 @@ const GetComments = () => {
   const { reviewID } = useParams();
   const [error, setError] = useState(null);
   const [comments, setComments] = useState([]);
-
+  console.log(reviewID);
   useEffect(() => {
     getCommentsByReviewID(reviewID)
       .then((data) => setComments(data))
