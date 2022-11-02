@@ -97,7 +97,7 @@ width: 50px
   border-radius: 5px;
 }
 
-#reviewCard{
+.reviewCard{
   border-style: solid;
   border-color: black;
   margin: 10px;
@@ -173,4 +173,24 @@ width: 50px
   width: 200px;
   height: 50px;
   float: right;
+}
+
+#increaseVote{
+  margin: 10px;
+  background-color: green;
+  border-radius: 5px;
+  height: 50px;
+  width: 150px;
+}
+
+#decreaseVote{
+  margin: 10px;
+  background-color: red;
+  border-radius: 5px;
+  height: 50px;
+  width: 150px;
+}
+
+#spinner{
+  margin-top: 200px;
 }

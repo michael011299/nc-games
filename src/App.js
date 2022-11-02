@@ -25,7 +25,7 @@ const App = () => {
             }
           />
           <Route
-            path={`/${reviewCategory}/reviews`}
+            path={`/:reviewCategory/reviews`}
             element={
               <ReviewPageBody
                 reviewID={reviewID}
