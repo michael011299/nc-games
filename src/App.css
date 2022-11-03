@@ -193,15 +193,16 @@ width: 50px
 }
 
 #spinner{
-  margin-top: 200px;
+  margin-top: 100px;
   margin-left: 50px;
+  font-size: 30px;
   color: black;
 }
 
 #addComment{
   background-color: white;
   border-radius: 5px;
-  width: 500px;
+  width: 700px;
   margin: 10px;
   margin-left: 20px;
   margin-top: -60px;
@@ -237,5 +238,24 @@ width: 50px
   float: right;
   margin-right: 30px;
   margin-top: -20px;
+}
 
+#deleteComment{
+  float: right;
+  margin-top: -30px;
+}
+
+#addcommentbox{
+  height: 50px;
+  width: 375px;
+  resize: none;
+  overflow-y: scroll ;
+}
+
+#commentbox{
+height: 30px;
+}
+
+#reviewcommenttitle{
+  font-size: 25px;
 }

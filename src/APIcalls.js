@@ -61,3 +61,7 @@ export const postComments = (reviewID, newComment) => {
       return response.data.comments;
     });
 };
+
+export const deleteComment = (comment_id) => {
+  return gamesApi.delete(`/comments/${comment_id}`);
+};

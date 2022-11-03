@@ -25,13 +25,13 @@ const PostComments = ({ setCommentList }) => {
   };
 
   return (
-    <div>
+    <div id="commentbox">
       <form id="addComment">
         <fieldset id="fieldset">
           <legend>Add Comment</legend>
           <label> Comment: </label>
           <input
-            id="addToDo"
+            id="addcommentbox"
             type="text"
             value={newComment}
             onChange={handleCommentChange}

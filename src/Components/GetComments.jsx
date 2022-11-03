@@ -1,4 +1,4 @@
-import { getCommentsByReviewID } from "../APIcalls";
+import { deleteComment, getCommentsByReviewID } from "../APIcalls";
 import { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
@@ -46,6 +46,12 @@ const GetComments = () => {
                   <Card.Text>Comment: {comment.body}</Card.Text>
                   <Button>Votes: {comment.votes}</Button>
                   <Card.Text>Posted: {comment.created_at}</Card.Text>
+                  <Button
+                    id="deleteComment"
+                    onClick={() => deleteComment(comment.comment_id)}
+                  >
+                    Delete This Comment ❌
+                  </Button>
                 </Card>
               );
             })}

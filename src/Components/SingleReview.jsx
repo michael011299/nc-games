@@ -58,6 +58,9 @@ const SingleReview = () => {
               <Card.Text id="cardCat">{singularReview.category}</Card.Text>
               <Card.Text>{singularReview.review_body}</Card.Text>
               <Card.Text>Owner: {singularReview.owner}</Card.Text>
+              <Card.Text>
+                Comment count: {singularReview.comment_count}
+              </Card.Text>
               <Card.Text>Votes: {count}</Card.Text>
               <Button
                 id="increaseVote"
