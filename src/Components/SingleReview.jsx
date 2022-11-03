@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { decreaseVote, getReviewByID, increaseVote } from "../APIcalls";
 import GetComments from "./GetComments";
-import PostComments from "./PostComments";
 import Spinner from "react-bootstrap/Spinner";
 
 const SingleReview = () => {
@@ -78,7 +77,6 @@ const SingleReview = () => {
               >
                 Remove a vote 🙃
               </Button>
-              <PostComments />
             </Card>
           </div>
           <h3>Review #{singularReview.review_id} comments :</h3>

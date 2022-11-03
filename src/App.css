@@ -93,6 +93,7 @@ width: 50px
   border-style: solid;
   border-color: black;
   margin: 10px;
+  margin-top: 40px;
   background-color: red;
   border-radius: 5px;
 }
@@ -199,6 +200,42 @@ width: 50px
 
 #addComment{
   background-color: white;
+  border-radius: 5px;
+  width: 500px;
   margin: 10px;
-  margin-top: 20px
+  margin-left: 20px;
+  margin-top: -60px;
+  float: right;
+}
+
+.Open{
+  background-color: black;
+  font-size: 30px;
+  color: white;
+  margin-left: 10px;
+}
+
+.sortby{
+  color: rgba(255, 255, 255, 0);
+}
+
+#sortpage{
+  float: right;
+  margin-top: -40px;
+  margin-right: 35px;
+}
+
+#orderby{
+  float: right;
+  margin-top: -50px;
+  margin-right: 10px;
+  width: 400px;
+  height: 100px;
+}
+
+#isUploading{
+  float: right;
+  margin-right: 30px;
+  margin-top: -20px;
+
 }

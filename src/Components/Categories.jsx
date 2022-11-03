@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getCategories } from "../APIcalls";
 
-const Categories = ({ setReviewCategory, reviews }) => {
+const Categories = ({ setReviewCategory }) => {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
 

@@ -2,15 +2,18 @@ import { getCommentsByReviewID } from "../APIcalls";
 import { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import PostComments from "./PostComments";
 
 const GetComments = () => {
   const { reviewID } = useParams();
   const [error, setError] = useState(null);
-  const [comments, setComments] = useState([]);
+  const [commentList, setCommentList] = useState([]);
 
   useEffect(() => {
     getCommentsByReviewID(reviewID)
-      .then((data) => setComments(data))
+      .then((data) => {
+        setCommentList(data);
+      })
       .catch((err) => {
         if (err.response.status)
           setError(
@@ -27,21 +30,26 @@ const GetComments = () => {
           <p>{error}</p>
         </div>
       ) : (
-        <div id="commentPage">
-          {comments.map((comment) => {
-            return (
-              <Card
-                key={comment.comment_id}
-                className="singleCommentCard"
-                id={comment.comment_id}
-              >
-                <Card.Title>Author: {comment.author}</Card.Title>
-                <Card.Text>Comment: {comment.body}</Card.Text>
-                <Button>Votes: {comment.votes}</Button>
-                <Card.Text>{comment.created_at}</Card.Text>
-              </Card>
-            );
-          })}
+        <div>
+          <div>
+            <PostComments setCommentList={setCommentList} />
+          </div>
+          <div id="commentPage">
+            {commentList.map((comment) => {
+              return (
+                <Card
+                  key={comment.comment_id}
+                  className="singleCommentCard"
+                  id={comment.comment_id}
+                >
+                  <Card.Title>Author: {comment.author}</Card.Title>
+                  <Card.Text>Comment: {comment.body}</Card.Text>
+                  <Button>Votes: {comment.votes}</Button>
+                  <Card.Text>Posted: {comment.created_at}</Card.Text>
+                </Card>
+              );
+            })}
+          </div>
         </div>
       )}
     </>

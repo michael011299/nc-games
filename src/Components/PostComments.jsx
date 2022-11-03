@@ -2,10 +2,10 @@ import { useState } from "react";
 import { postComments } from "../APIcalls";
 import { useParams } from "react-router-dom";
 
-const PostComments = () => {
-  // const [newUsername, setUserName] = useState("");
+const PostComments = ({ setCommentList }) => {
   const [newComment, setNewComment] = useState("");
   const { reviewID } = useParams();
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleCommentChange = (event) => {
     setNewComment(event.target.value);
@@ -13,9 +13,15 @@ const PostComments = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    postComments(reviewID, newComment);
+    setIsUploading(true);
+    postComments(reviewID, newComment).then((response) => {
+      setCommentList((currCommentList) => {
+        setIsUploading(false);
+        return [response, ...currCommentList];
+      });
+    });
+
     setNewComment("");
-    // setUserName("");
   };
 
   return (
@@ -30,9 +36,12 @@ const PostComments = () => {
             value={newComment}
             onChange={handleCommentChange}
           />
-          <button onClick={handleSubmit} type="submit">
+          <button type="submit" onClick={handleSubmit}>
             Add
           </button>
+          <div>
+            {isUploading ? <p id="isUploading">Uploading...</p> : <></>}
+          </div>
         </fieldset>
       </form>
     </div>
@@ -40,15 +49,3 @@ const PostComments = () => {
 };
 
 export default PostComments;
-
-//   const handleUserNameChange = (event) => {
-//     setUserName(event.target.value);
-//   };
-
-/* <label>Username: </label>
-          <input
-            id="username"
-            type="text"
-            value={newUsername}
-            onChange={handleUserNameChange}
-          /> */

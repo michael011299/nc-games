@@ -4,10 +4,17 @@ const gamesApi = axios.create({
   baseURL: "https://michaels-back-end-project-22.herokuapp.com/api",
 });
 
-export const getReviews = () => {
-  return gamesApi.get(`/reviews`).then((response) => {
-    return response.data.reviews;
-  });
+export const getReviews = (
+  sort_by = "created_at",
+  order_by = "DESC",
+  category
+) => {
+  console.log(sort_by);
+  return gamesApi
+    .get(`/reviews`, { params: { sort_by, order_by, category } })
+    .then((response) => {
+      return response.data.reviews;
+    });
 };
 
 export const getReviewByID = (reviewID) => {

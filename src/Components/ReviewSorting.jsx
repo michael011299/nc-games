@@ -1,46 +1,81 @@
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import { useState } from "react";
+import { Card } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
+import { getReviews } from "../APIcalls";
+import { useEffect, useState } from "react";
 
-const ReviewSorting = () => {
-  const [sortMenuOpen, setSortMenuOpen] = useState(false);
+const ReviewSorting = ({ sortUrl, setReviewID }) => {
+  const [Loading, setLoading] = useState(true);
+  const { reviewCategory } = useParams();
+  const [reviews, setReviews] = useState([]);
+  const [error, setError] = useState(null);
 
-  const handleToggle = () => {
-    setSortMenuOpen(!sortMenuOpen);
-  };
+  useEffect(() => {
+    setLoading(true);
+    getReviews(sortUrl)
+      .then((reviews) => {
+        setReviews(reviews);
+        setLoading(false);
+      })
+      .catch((err) => {
+        if (err.response.status)
+          setError(
+            `Ooops, ${err.response.request.status}, ${err.response.request.statusText}, please try again`
+          );
+      });
+  }, []);
 
-  const closeMenu = () => {
-    setSortMenuOpen(false);
-  };
+  if (Loading) {
+    return <div id="spinner">Loading...</div>;
+  }
 
   return (
-    <>
-      <DropdownButton
-        id="dropdown-basic-button"
-        title={sortMenuOpen ? "Open" : "Sort By"}
-        onClick={handleToggle}
-      >
-        <Dropdown.Item href={"sort_by=title&order_by=ASC"} onClick={closeMenu}>
-          Title
-        </Dropdown.Item>
-        <Dropdown.Item href={"?sort_by=votes&order_by=ASC"} onClick={closeMenu}>
-          votes
-        </Dropdown.Item>
-        <Dropdown.Item
-          href={"?sort_by=created_at&order_by=ASC"}
-          onClick={closeMenu}
-        >
-          Created at
-        </Dropdown.Item>
-        <Dropdown.Item
-          href={"?sort_by=comment_count&order_by=ASC"}
-          onClick={closeMenu}
-          exact
-        >
-          Comment count
-        </Dropdown.Item>
-      </DropdownButton>
-    </>
+    <div>
+      {error ? (
+        <div id="error">
+          <h2>Error</h2>
+          <p>{error}</p>
+        </div>
+      ) : (
+        <div id="reviewpage">
+          {reviews.map((review) => {
+            if (reviewCategory === review.category) {
+              return (
+                <Card
+                  className="reviewCard"
+                  key={review.review_id}
+                  id={review.review_id}
+                >
+                  <Card.Title id="Title">{review.title}</Card.Title>
+                  <Card.Text id="cardCat">{review.category}</Card.Text>
+                  <Image
+                    id="reviewImg"
+                    alt={`user ${review.review_id}`}
+                    src={review.review_img_url}
+                  ></Image>
+                  <Card.Text>{review.review_body}</Card.Text>
+                  <Card.Text>Owner: {review.owner}</Card.Text>
+                  <Card.Text>Votes: {review.votes}</Card.Text>
+                  <Card.Text>Comments: {review.comment_count}</Card.Text>
+                  <Card.Text>
+                    Posted on: {review.created_at.slice(0, 10)}
+                  </Card.Text>
+                  <Link to={`/reviews/${review.review_id}`}>
+                    <Button
+                      id="reviewButton"
+                      onClick={() => setReviewID(review.review_id)}
+                    >
+                      Leave comments and vote on reviews here ➡️
+                    </Button>
+                  </Link>
+                </Card>
+              );
+            }
+          })}
+        </div>
+      )}
+    </div>
   );
 };
 
