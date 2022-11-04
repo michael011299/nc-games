@@ -56,26 +56,32 @@ const GetComments = ({ singularReview }) => {
               {isDeleting ? <p>Deleting comment ...</p> : <></>}
             </div>
             <div id="commentPage">
-              {commentList.map((comment) => {
-                return (
-                  <Card
-                    key={comment.comment_id}
-                    className="singleCommentCard"
-                    id={comment.comment_id}
-                  >
-                    <Card.Title>Author: {comment.author}</Card.Title>
-                    <Card.Text>Comment: {comment.body}</Card.Text>
-                    <Button>Votes: {comment.votes}</Button>
-                    <Card.Text>Posted: {comment.created_at}</Card.Text>
-                    <Button
-                      id="deleteComment"
-                      onClick={() => handleDeleteComment(comment)}
+              {commentList.length === 0 ? (
+                <div>
+                  <p id="nocomment">No comments available</p>
+                </div>
+              ) : (
+                commentList.map((comment) => {
+                  return (
+                    <Card
+                      key={comment.comment_id}
+                      className="singleCommentCard"
+                      id={comment.comment_id}
                     >
-                      Delete This Comment ❌
-                    </Button>
-                  </Card>
-                );
-              })}
+                      <Card.Title>Author: {comment.author}</Card.Title>
+                      <Card.Text>Comment: {comment.body}</Card.Text>
+                      <Button>Votes: {comment.votes}</Button>
+                      <Card.Text>Posted: {comment.created_at}</Card.Text>
+                      <Button
+                        id="deleteComment"
+                        onClick={() => handleDeleteComment(comment)}
+                      >
+                        Delete This Comment ❌
+                      </Button>
+                    </Card>
+                  );
+                })
+              )}
             </div>
           </div>
         )}
