@@ -82,8 +82,7 @@ const SingleReview = () => {
               </Button>
             </Card>
           </div>
-          <h3>Review #{singularReview.review_id} comments :</h3>
-          <GetComments />
+          <GetComments singularReview={singularReview} />
         </div>
       )}
     </div>

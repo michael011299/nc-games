@@ -9,7 +9,6 @@ export const getReviews = (
   order_by = "DESC",
   category
 ) => {
-  console.log(sort_by);
   return gamesApi
     .get(`/reviews`, { params: { sort_by, order_by, category } })
     .then((response) => {

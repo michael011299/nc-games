@@ -154,11 +154,12 @@ width: 50px
 }
 
 #commentPage{
+  float: right;
   border-style: solid;
   border-color: red;
   background-color: black;
+  width: 90%;
   margin: 10px;
-  margin-left: 150px;
 }
 
 #signin{
@@ -199,16 +200,6 @@ width: 50px
   color: black;
 }
 
-#addComment{
-  background-color: white;
-  border-radius: 5px;
-  width: 700px;
-  margin: 10px;
-  margin-left: 20px;
-  margin-top: -60px;
-  float: right;
-}
-
 .Open{
   background-color: black;
   font-size: 30px;
@@ -238,6 +229,7 @@ width: 50px
   float: right;
   margin-right: 30px;
   margin-top: -20px;
+  background-color: green;
 }
 
 #deleteComment{
@@ -245,17 +237,31 @@ width: 50px
   margin-top: -30px;
 }
 
+#commentbox{
+  width: 89%;
+  float: right;
+  margin-right: 10px;
+  margin-bottom: 30px;
+}
+
 #addcommentbox{
   height: 50px;
-  width: 375px;
+  width: 60%;
   resize: none;
   overflow-y: scroll ;
+  margin: 10px;
 }
 
-#commentbox{
-height: 30px;
+#isDeleting{
+  float: right;
+  margin-top: -40px;
+  background-color: red;
+
 }
 
-#reviewcommenttitle{
-  font-size: 25px;
+#reviewerror{
+ float: right;
+ margin-right: 30%;
+ margin-left: 10%;
+ margin-top: -100px;
 }

@@ -29,8 +29,7 @@ const PostComments = ({ setCommentList }) => {
       <form id="addComment">
         <fieldset id="fieldset">
           <legend>Add Comment</legend>
-          <label> Comment: </label>
-          <input
+          <textarea
             id="addcommentbox"
             type="text"
             value={newComment}
