@@ -4,10 +4,16 @@ const gamesApi = axios.create({
   baseURL: "https://michaels-back-end-project-22.herokuapp.com/api",
 });
 
-export const getReviews = () => {
-  return gamesApi.get(`/reviews`).then((response) => {
-    return response.data.reviews;
-  });
+export const getReviews = (
+  sort_by = "created_at",
+  order_by = "DESC",
+  category
+) => {
+  return gamesApi
+    .get(`/reviews`, { params: { sort_by, order_by, category } })
+    .then((response) => {
+      return response.data.reviews;
+    });
 };
 
 export const getReviewByID = (reviewID) => {
@@ -44,8 +50,17 @@ export const getCommentsByReviewID = (reviewID) => {
     .then((response) => response.data.comments);
 };
 
-export const postComments = (reviewID) => {
-  return gamesApi.post(`/api/reviews/:review_id/comments`).then((response) => {
-    return response;
-  });
+export const postComments = (reviewID, newComment) => {
+  return gamesApi
+    .post(`/reviews/${reviewID}/comments`, {
+      username: "tickle122",
+      body: newComment,
+    })
+    .then((response) => {
+      return response.data.comments;
+    });
+};
+
+export const deleteComment = (comment_id) => {
+  return gamesApi.delete(`/comments/${comment_id}`);
 };

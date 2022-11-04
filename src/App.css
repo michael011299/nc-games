@@ -93,6 +93,7 @@ width: 50px
   border-style: solid;
   border-color: black;
   margin: 10px;
+  margin-top: 40px;
   background-color: red;
   border-radius: 5px;
 }
@@ -153,11 +154,12 @@ width: 50px
 }
 
 #commentPage{
+  float: right;
   border-style: solid;
   border-color: red;
   background-color: black;
+  width: 90%;
   margin: 10px;
-  margin-left: 150px;
 }
 
 #signin{
@@ -192,5 +194,74 @@ width: 50px
 }
 
 #spinner{
-  margin-top: 200px;
+  margin-top: 100px;
+  margin-left: 50px;
+  font-size: 30px;
+  color: black;
+}
+
+.Open{
+  background-color: black;
+  font-size: 30px;
+  color: white;
+  margin-left: 10px;
+}
+
+.sortby{
+  color: rgba(255, 255, 255, 0);
+}
+
+#sortpage{
+  float: right;
+  margin-top: -40px;
+  margin-right: 35px;
+}
+
+#orderby{
+  float: right;
+  margin-top: -50px;
+  margin-right: 10px;
+  width: 400px;
+  height: 100px;
+}
+
+#isUploading{
+  float: right;
+  margin-right: 30px;
+  margin-top: -20px;
+  background-color: green;
+}
+
+#deleteComment{
+  float: right;
+  margin-top: -30px;
+}
+
+#commentbox{
+  width: 89%;
+  float: right;
+  margin-right: 10px;
+  margin-bottom: 30px;
+}
+
+#addcommentbox{
+  height: 50px;
+  width: 60%;
+  resize: none;
+  overflow-y: scroll ;
+  margin: 10px;
+}
+
+#isDeleting{
+  float: right;
+  margin-top: -40px;
+  background-color: red;
+
+}
+
+#reviewerror{
+ float: right;
+ margin-right: 30%;
+ margin-left: 10%;
+ margin-top: -100px;
 }
