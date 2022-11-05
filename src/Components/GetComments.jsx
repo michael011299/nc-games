@@ -4,7 +4,7 @@ import { Button, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import PostComments from "./PostComments";
 
-const GetComments = ({ singularReview }) => {
+const GetComments = ({ singularReview, setCommentCount, commentCount }) => {
   const { reviewID } = useParams();
   const [error, setError] = useState(null);
   const [commentList, setCommentList] = useState([]);
@@ -26,10 +26,11 @@ const GetComments = ({ singularReview }) => {
   const handleDeleteComment = (comment) => {
     const itemToRemove = commentList.indexOf(comment);
     setIsDeleting(true);
+    setCommentCount(commentCount - 1);
     deleteComment(comment.comment_id).then((response) => {
       setCommentList((currCommentList) => {
         setIsDeleting(false);
-        const deletItems = [...currCommentList.splice(itemToRemove, 1)];
+        const deleteItems = [...currCommentList.splice(itemToRemove, 1)];
         return currCommentList;
       });
     });
@@ -38,7 +39,11 @@ const GetComments = ({ singularReview }) => {
   return (
     <>
       <div>
-        <PostComments setCommentList={setCommentList} />
+        <PostComments
+          setCommentCount={setCommentCount}
+          commentCount={commentCount}
+          setCommentList={setCommentList}
+        />
       </div>
       <>
         {error ? (
@@ -70,7 +75,7 @@ const GetComments = ({ singularReview }) => {
                     >
                       <Card.Title>Author: {comment.author}</Card.Title>
                       <Card.Text>Comment: {comment.body}</Card.Text>
-                      <Button>Votes: {comment.votes}</Button>
+                      <Card.Text>Votes: {comment.votes}</Card.Text>
                       <Card.Text>Posted: {comment.created_at}</Card.Text>
                       <Button
                         id="deleteComment"

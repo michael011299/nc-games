@@ -8,10 +8,15 @@ import { getCategories } from "../APIcalls";
 const Categories = ({ setReviewCategory }) => {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
+  const [Loading, setLoading] = useState();
 
   useEffect(() => {
+    setLoading(true);
     getCategories()
-      .then((categories) => setCategories(categories))
+      .then((categories) => {
+        setCategories(categories);
+        setLoading(false);
+      })
       .catch((err) => {
         if (err.response.status)
           setError(
@@ -38,7 +43,7 @@ const Categories = ({ setReviewCategory }) => {
                   <Card.Text>{category.description}</Card.Text>
                   <Link to={`/${category.slug}/reviews`}>
                     <Button
-                      id="selectCatButton"
+                      className="button"
                       onClick={() => {
                         return setReviewCategory(category.slug);
                       }}

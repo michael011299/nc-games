@@ -2,7 +2,7 @@ import { useState } from "react";
 import { postComments } from "../APIcalls";
 import { useParams } from "react-router-dom";
 
-const PostComments = ({ setCommentList }) => {
+const PostComments = ({ setCommentList, setCommentCount, commentCount }) => {
   const [newComment, setNewComment] = useState("");
   const { reviewID } = useParams();
   const [isUploading, setIsUploading] = useState(false);
@@ -14,6 +14,9 @@ const PostComments = ({ setCommentList }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsUploading(true);
+    console.log();
+    setCommentCount(parseInt(commentCount) + 1);
+
     postComments(reviewID, newComment).then((response) => {
       setCommentList((currCommentList) => {
         setIsUploading(false);

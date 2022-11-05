@@ -64,3 +64,7 @@ export const postComments = (reviewID, newComment) => {
 export const deleteComment = (comment_id) => {
   return gamesApi.delete(`/comments/${comment_id}`);
 };
+
+// export const increaseCommentCount = () => {
+//   return gamesApi.patch(`reviews/${}`).then
+// }
