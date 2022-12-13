@@ -42,7 +42,7 @@ const ReviewPageBody = ({ setReviewID }) => {
   return (
     <div>
       <div>
-        <h2>{reviewCategory} - Reviews</h2>
+        <h2 id="strategyh2">{reviewCategory} - Reviews</h2>
         <div id="orderby">
           <fieldset>
             <legend>Order Results:</legend>

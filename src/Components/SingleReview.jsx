@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { decreaseVote, getReviewByID, increaseVote } from "../APIcalls";
 import GetComments from "./GetComments";
-import Spinner from "react-bootstrap/Spinner";
 
 const SingleReview = () => {
   const { reviewID } = useParams();
@@ -11,6 +10,7 @@ const SingleReview = () => {
   const [error, setError] = useState(null);
   const [count, setCount] = useState(0);
   const [Loading, setLoading] = useState(true);
+  const [commentCount, setCommentCount] = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -18,6 +18,7 @@ const SingleReview = () => {
       .then((review) => {
         setSingularReview(review);
         setCount(review.votes);
+        setCommentCount(review.comment_count);
         setLoading(false);
       })
       .catch((err) => {
@@ -30,10 +31,8 @@ const SingleReview = () => {
 
   if (Loading) {
     return (
-      <div>
-        <Spinner id="spinner" animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+      <div id="spinner">
+        <p>Loading...</p>
       </div>
     );
   }
@@ -48,7 +47,7 @@ const SingleReview = () => {
       ) : (
         <div>
           <h2>Review #{singularReview.review_id}</h2>
-          <div id="reviewpage">
+          <div id="singlereviewpage">
             <Card
               id={singularReview.review_id}
               key={singularReview.review_id}
@@ -58,9 +57,7 @@ const SingleReview = () => {
               <Card.Text id="cardCat">{singularReview.category}</Card.Text>
               <Card.Text>{singularReview.review_body}</Card.Text>
               <Card.Text>Owner: {singularReview.owner}</Card.Text>
-              <Card.Text>
-                Comment count: {singularReview.comment_count}
-              </Card.Text>
+              <Card.Text>Comment count: {commentCount}</Card.Text>
               <Card.Text>Votes: {count}</Card.Text>
               <Button
                 id="increaseVote"
@@ -82,7 +79,11 @@ const SingleReview = () => {
               </Button>
             </Card>
           </div>
-          <GetComments singularReview={singularReview} />
+          <GetComments
+            singularReview={singularReview}
+            setCommentCount={setCommentCount}
+            commentCount={commentCount}
+          />
         </div>
       )}
     </div>

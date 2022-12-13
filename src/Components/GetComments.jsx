@@ -4,7 +4,7 @@ import { Button, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import PostComments from "./PostComments";
 
-const GetComments = ({ singularReview }) => {
+const GetComments = ({ singularReview, setCommentCount, commentCount }) => {
   const { reviewID } = useParams();
   const [error, setError] = useState(null);
   const [commentList, setCommentList] = useState([]);
@@ -26,10 +26,11 @@ const GetComments = ({ singularReview }) => {
   const handleDeleteComment = (comment) => {
     const itemToRemove = commentList.indexOf(comment);
     setIsDeleting(true);
+    setCommentCount(commentCount - 1);
     deleteComment(comment.comment_id).then((response) => {
       setCommentList((currCommentList) => {
         setIsDeleting(false);
-        const deletItems = [...currCommentList.splice(itemToRemove, 1)];
+        const deleteItems = [...currCommentList.splice(itemToRemove, 1)];
         return currCommentList;
       });
     });
@@ -38,7 +39,11 @@ const GetComments = ({ singularReview }) => {
   return (
     <>
       <div>
-        <PostComments setCommentList={setCommentList} />
+        <PostComments
+          setCommentCount={setCommentCount}
+          commentCount={commentCount}
+          setCommentList={setCommentList}
+        />
       </div>
       <>
         {error ? (
@@ -56,26 +61,32 @@ const GetComments = ({ singularReview }) => {
               {isDeleting ? <p>Deleting comment ...</p> : <></>}
             </div>
             <div id="commentPage">
-              {commentList.map((comment) => {
-                return (
-                  <Card
-                    key={comment.comment_id}
-                    className="singleCommentCard"
-                    id={comment.comment_id}
-                  >
-                    <Card.Title>Author: {comment.author}</Card.Title>
-                    <Card.Text>Comment: {comment.body}</Card.Text>
-                    <Button>Votes: {comment.votes}</Button>
-                    <Card.Text>Posted: {comment.created_at}</Card.Text>
-                    <Button
-                      id="deleteComment"
-                      onClick={() => handleDeleteComment(comment)}
+              {commentList.length === 0 ? (
+                <div>
+                  <p id="nocomment">No comments available</p>
+                </div>
+              ) : (
+                commentList.map((comment) => {
+                  return (
+                    <Card
+                      key={comment.comment_id}
+                      className="singleCommentCard"
+                      id={comment.comment_id}
                     >
-                      Delete This Comment ❌
-                    </Button>
-                  </Card>
-                );
-              })}
+                      <Card.Title>Author: {comment.author}</Card.Title>
+                      <Card.Text>Comment: {comment.body}</Card.Text>
+                      <Card.Text>Votes: {comment.votes}</Card.Text>
+                      <Card.Text>Posted: {comment.created_at}</Card.Text>
+                      <Button
+                        id="deleteComment"
+                        onClick={() => handleDeleteComment(comment)}
+                      >
+                        Delete This Comment ❌
+                      </Button>
+                    </Card>
+                  );
+                })
+              )}
             </div>
           </div>
         )}
